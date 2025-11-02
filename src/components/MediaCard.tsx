@@ -32,7 +32,13 @@ const MediaCard: React.FC<MediaCardProps> = ({
         <p className="text-gray-600 text-sm mb-2">{anoLancamento}</p>
         <button
           onClick={() => onToggleAdicionarALista(item.id)}
-          className="bg-blue-500 hover:bg-blue-600 text-white text-sm py-1 px-3 rounded"
+          className="bg-(--color-ja-vi-secondary)
+                     hover:bg-[#8ade5f]
+                    text-(--color-ja-vi-primary)
+                    text-sm py-1 px-3 rounded
+                    transition-colors duration-200
+                    cursor-pointer
+                    "
         >
           + Lista
         </button>

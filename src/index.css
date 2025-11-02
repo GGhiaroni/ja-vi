@@ -1,1 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 @import "tailwindcss";
+
+:root {
+  --color-ja-vi-primary: #163300;
+  --color-ja-vi-secondary: #9fe870;
+  --font-family-manrope: "Manrope", sans-serif;
+}
+
+body {
+  font-family: var(--font-family-manrope);
+
+  background-color: var(--color-ja-vi-primary);
+}
