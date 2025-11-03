@@ -4,13 +4,10 @@ import type { MediaItem } from "../types/media";
 
 interface MediaCardProps {
   item: MediaItem;
-  onToggleAdicionarALista: (id: number) => void;
+  onToggleMinhaLista: (id: number) => void;
 }
 
-const MediaCard: React.FC<MediaCardProps> = ({
-  item,
-  onToggleAdicionarALista,
-}) => {
+const MediaCard: React.FC<MediaCardProps> = ({ item, onToggleMinhaLista }) => {
   const titulo = item.title ?? item.name ?? "Título desconhecido";
   const imagemUrl = item.poster_path
     ? `${IMAGE_BASE_URL}${item.poster_path}`
@@ -31,7 +28,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
         <h3 className="font-bold text-lg mb-1 truncate">{titulo}</h3>
         <p className="text-gray-600 text-sm mb-2">{anoLancamento}</p>
         <button
-          onClick={() => onToggleAdicionarALista(item.id)}
+          onClick={() => onToggleMinhaLista(item.id)}
           className="bg-(--color-ja-vi-secondary)
                      hover:bg-[#8ade5f]
                     text-(--color-ja-vi-primary)

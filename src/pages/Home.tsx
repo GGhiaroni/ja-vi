@@ -31,7 +31,7 @@ const Home: React.FC = () => {
             <MediaCard
               key={item.id}
               item={item}
-              onToggleAdicionarALista={(id) =>
+              onToggleMinhaLista={(id) =>
                 console.log(`Adicionando item ${id} à lista.`)
               }
             />
