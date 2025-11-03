@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface MinhaListaItem {
   mediaId: number;
@@ -13,30 +14,37 @@ interface EstadoMinhaLista {
   count: () => number;
 }
 
-export const useMinhaListaStore = create<EstadoMinhaLista>((set, get) => ({
-  lista: {},
+export const useMinhaListaStore = create<EstadoMinhaLista>()(
+  persist(
+    (set, get) => ({
+      lista: {},
 
-  toggleItem: (mediaId: number) => {
-    set((state) => {
-      const novaLista = { ...state.lista };
+      toggleItem: (mediaId: number) => {
+        set((state) => {
+          const novaLista = { ...state.lista };
 
-      if (novaLista[mediaId]) {
-        delete novaLista[mediaId];
-      } else {
-        novaLista[mediaId] = {
-          mediaId,
-          adicionadoEm: Date.now(),
-        };
-      }
-      return { lista: novaLista };
-    });
-  },
+          if (novaLista[mediaId]) {
+            delete novaLista[mediaId];
+          } else {
+            novaLista[mediaId] = {
+              mediaId,
+              adicionadoEm: Date.now(),
+            };
+          }
+          return { lista: novaLista };
+        });
+      },
 
-  estaAdicionado: (mediaId: number) => {
-    return !!get().lista[mediaId];
-  },
+      estaAdicionado: (mediaId: number) => {
+        return !!get().lista[mediaId];
+      },
 
-  count: () => {
-    return Object.keys(get().lista).length;
-  },
-}));
+      count: () => {
+        return Object.keys(get().lista).length;
+      },
+    }),
+    {
+      name: "ja-vi-localstorage",
+    }
+  )
+);
