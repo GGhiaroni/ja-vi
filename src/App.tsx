@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex justify-center">
+      <main className="py-8 flex justify-center">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="minhalista" element={<MinhaLista />} />
