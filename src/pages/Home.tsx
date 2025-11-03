@@ -28,13 +28,7 @@ const Home: React.FC = () => {
         {mediaList
           .filter((item) => item.poster_path)
           .map((item) => (
-            <MediaCard
-              key={item.id}
-              item={item}
-              onToggleMinhaLista={(id) =>
-                console.log(`Adicionando item ${id} à lista.`)
-              }
-            />
+            <MediaCard key={item.id} item={item} />
           ))}
       </div>
     </div>

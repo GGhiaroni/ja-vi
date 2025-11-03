@@ -13,7 +13,7 @@ interface EstadoMinhaLista {
   count: () => number;
 }
 
-export const useWatchlistStore = create<EstadoMinhaLista>((set, get) => ({
+export const useMinhaListaStore = create<EstadoMinhaLista>((set, get) => ({
   lista: {},
 
   toggleItem: (mediaId: number) => {
@@ -28,7 +28,6 @@ export const useWatchlistStore = create<EstadoMinhaLista>((set, get) => ({
           adicionadoEm: Date.now(),
         };
       }
-      // Retorna o novo estado
       return { lista: novaLista };
     });
   },
