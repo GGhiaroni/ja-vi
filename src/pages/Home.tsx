@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TRENDING_URL } from "../api/config";
 import ErrorMessage from "../components/ErrorMessage";
 import LoadingSpinner from "../components/LoadingSpinner";
 import MediaCard from "../components/MediaCard";
 import { useFetch } from "../hooks/useFetch";
+import { useMediaStore } from "../store/useMediaStore";
 import type { MediaResponse } from "../types/media";
 
 const Home: React.FC = () => {
   const { data, loading, error } = useFetch<MediaResponse>(TRENDING_URL);
+
+  const setMediaList = useMediaStore((state) => state.setMediaList);
+
+  useEffect(() => {
+    if (data && data.results) {
+      setMediaList(data.results);
+    }
+  }, [data, setMediaList]);
 
   if (loading) {
     return <LoadingSpinner />;
