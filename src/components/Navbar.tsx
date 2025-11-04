@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
           to="/"
           className="text-(--color-ja-vi-secondary) text-2xl font-bold"
         >
-          Já Vi?
+          ¿já vi?
         </Link>
 
         <nav className="flex items-center space-x-6">
