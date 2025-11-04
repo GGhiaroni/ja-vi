@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import DetalhesMedia from "./pages/DetalhesMedia";
 import Home from "./pages/Home";
 import MinhaLista from "./pages/MinhaLista";
 
@@ -11,6 +12,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="minhalista" element={<MinhaLista />} />
+          <Route
+            path="/media/:media_type/:titulo"
+            element={<DetalhesMedia />}
+          />
         </Routes>
       </main>
     </div>

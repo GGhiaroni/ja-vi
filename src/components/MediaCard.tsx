@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../api/config";
 import { useMinhaListaStore } from "../store/useMinhaListaStore";
 import type { MediaItem } from "../types/media";
@@ -23,33 +24,45 @@ const MediaCard: React.FC<MediaCardProps> = ({ item }) => {
   const imagemUrl = item.poster_path
     ? `${IMAGE_BASE_URL}${item.poster_path}`
     : "placeholder.jpg";
+
   const anoLancamento =
     item.release_date?.substring(0, 4) ??
     item.first_air_date?.substring(0, 4) ??
     "N/A";
 
+  const handleToggleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleItem(item.id);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl">
-      <img
-        src={imagemUrl}
-        alt={`Pôster de ${titulo}`}
-        className="w-full h-80 object-cover"
-      />
-      <div className="p-4">
-        <h3 className="font-bold text-lg mb-1 truncate">{titulo}</h3>
-        <p className="text-gray-600 text-sm mb-2">{anoLancamento}</p>
-        <button
-          onClick={() => toggleItem(item.id)}
-          className={`${buttonClasses}
+    <Link
+      to={`/media/${item.media_type}/${titulo}`}
+      className="block bg-white rounded-lg shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl"
+    >
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl">
+        <img
+          src={imagemUrl}
+          alt={`Pôster de ${titulo}`}
+          className="w-full h-80 object-cover"
+        />
+        <div className="p-4">
+          <h3 className="font-bold text-lg mb-1 truncate">{titulo}</h3>
+          <p className="text-gray-600 text-sm mb-2">{anoLancamento}</p>
+          <button
+            onClick={() => handleToggleClick}
+            className={`${buttonClasses}
                     text-sm py-1 px-3 rounded
                     transition-colors duration-200
                     cursor-pointer
                     `}
-        >
-          {textoBotao}
-        </button>
+          >
+            {textoBotao}
+          </button>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
