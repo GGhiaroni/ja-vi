@@ -8,7 +8,6 @@ interface MinhaListaItem {
 
 interface EstadoMinhaLista {
   lista: Record<number, MinhaListaItem>;
-
   toggleItem: (mediaId: number) => void;
   estaAdicionado: (mediaId: number) => boolean;
   count: () => number;
