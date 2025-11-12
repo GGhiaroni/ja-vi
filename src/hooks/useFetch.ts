@@ -6,14 +6,19 @@ interface FetchState<T> {
   error: string | null;
 }
 
-export function useFetch<T>(url: string): FetchState<T> {
+export function useFetch<T>(url: string | null): FetchState<T> {
   const [state, setState] = useState<FetchState<T>>({
     data: null,
-    loading: true,
+    loading: false,
     error: null,
   });
 
   useEffect(() => {
+    if (!url) {
+      setState({ data: null, loading: false, error: null });
+      return;
+    }
+
     const fetchData = async () => {
       setState({
         data: null,
