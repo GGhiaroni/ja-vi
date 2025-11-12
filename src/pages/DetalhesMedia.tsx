@@ -27,7 +27,7 @@ const DetalhesMedia: React.FC = () => {
 
   const itemASerExibido = data ?? buscaIdNoCache;
 
-  if (loading || !buscaIdNoCache) {
+  if (loading && !buscaIdNoCache) {
     return <LoadingSpinner />;
   }
 
