@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../api/config";
 import { useMinhaListaStore } from "../store/useMinhaListaStore";
 import type { MediaItem } from "../types/media";
+import { padronizarTitulo } from "../utils/padronizarTitulo";
 
 interface MediaCardProps {
   item: MediaItem;
@@ -21,6 +22,8 @@ const MediaCard: React.FC<MediaCardProps> = ({ item }) => {
 
   const titulo = item.title ?? item.name ?? "Título desconhecido";
 
+  const tituloPadronizado = padronizarTitulo(titulo);
+
   const imagemUrl = item.poster_path
     ? `${IMAGE_BASE_URL}${item.poster_path}`
     : "placeholder.jpg";
@@ -38,7 +41,7 @@ const MediaCard: React.FC<MediaCardProps> = ({ item }) => {
 
   return (
     <Link
-      to={`/media/${item.media_type}/${titulo}`}
+      to={`/media/${item.media_type}/${tituloPadronizado}`}
       className="block bg-white rounded-lg shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl"
     >
       <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl">
