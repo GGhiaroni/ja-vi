@@ -14,7 +14,6 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if (data && data.results) {
-      console.log(data.results);
       setMediaList(data.results);
     }
   }, [data, setMediaList]);
