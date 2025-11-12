@@ -13,7 +13,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="minhalista" element={<MinhaLista />} />
           <Route
-            path="/media/:media_type/:titulo"
+            path="/media/:media_type/:id/:titulo"
             element={<DetalhesMedia />}
           />
         </Routes>
