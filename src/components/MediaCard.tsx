@@ -51,7 +51,7 @@ const MediaCard: React.FC<MediaCardProps> = ({ item }) => {
           <h3 className="font-bold text-lg mb-1 truncate">{titulo}</h3>
           <p className="text-gray-600 text-sm mb-2">{anoLancamento}</p>
           <button
-            onClick={() => handleToggleClick}
+            onClick={handleToggleClick}
             className={`${buttonClasses}
                     text-sm py-1 px-3 rounded
                     transition-colors duration-200
