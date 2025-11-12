@@ -63,9 +63,7 @@ const DetalhesMedia: React.FC = () => {
               ★ {itemASerExibido.vote_average.toFixed(1)}
             </span>
             <span className="text-gray-400">
-              (
-              {itemASerExibido.media_type === "movie" ? "Filme" : "Série de TV"}
-              )
+              ({media_type === "tv" ? "Série de TV" : "Filme"})
             </span>
           </div>
 
