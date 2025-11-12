@@ -41,7 +41,7 @@ const MediaCard: React.FC<MediaCardProps> = ({ item }) => {
 
   return (
     <Link
-      to={`/media/${item.media_type}/${tituloPadronizado}`}
+      to={`/media/${item.media_type}/${item.id}/${tituloPadronizado}`}
       className="block bg-white rounded-lg shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl"
     >
       <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-xl">
