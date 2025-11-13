@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { getMediaDetailsURL, IMAGE_BASE_URL } from "../api/config";
+import BotaoAdicionarALista from "../components/BotaoAdicionarALista";
 import ErrorMessage from "../components/ErrorMessage";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useFetch } from "../hooks/useFetch";
@@ -71,6 +72,9 @@ const DetalhesMedia: React.FC = () => {
           <p className="text-lg text-gray-300 leading-relaxed">
             {itemASerExibido.overview}
           </p>
+          <div className="flex mt-7">
+            <BotaoAdicionarALista mediaId={Number(id)} />
+          </div>
         </div>
       </div>
     </div>
