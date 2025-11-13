@@ -21,8 +21,8 @@ export const BarraDePesquisa: React.FC = () => {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Buscar filme ou série..."
         className="px-4 py-2 rounded-md 
-          text-sm text-black 
-          bg-white bg-opacity-80
+          text-sm text-(--color-ja-vi-primary)
+          bg-(--color-ja-vi-secondary) bg-opacity-80
           focus:outline-none focus:ring-2 focus:ring-(--color-ja-vi-secondary)
           w-full md:w-auto"
       />
