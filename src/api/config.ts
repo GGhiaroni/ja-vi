@@ -8,3 +8,9 @@ export const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 export const getMediaDetailsURL = (mediaType: string, id: string): string => {
   return `${BASE_URL}/${mediaType}/${id}?api_key=${API_KEY}&language=pt-BR`;
 };
+
+export const getSearchURL = (query: string): string => {
+  return `${BASE_URL}/search/multi?api_key=${API_KEY}&language=pt-BR&query=${encodeURIComponent(
+    query
+  )}`;
+};
