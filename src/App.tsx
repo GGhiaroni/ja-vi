@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import DetalhesMedia from "./pages/DetalhesMedia";
 import Home from "./pages/Home";
 import MinhaLista from "./pages/MinhaLista";
+import PaginaDeBusca from "./pages/PaginaDeBusca";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             path="/media/:media_type/:id/:titulo"
             element={<DetalhesMedia />}
           />
+          <Route path="/search" element={<PaginaDeBusca />} />
         </Routes>
       </main>
     </div>
