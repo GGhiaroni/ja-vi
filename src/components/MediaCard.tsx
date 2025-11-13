@@ -1,25 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../api/config";
-import { useMinhaListaStore } from "../store/useMinhaListaStore";
 import type { MediaItem } from "../types/media";
 import { padronizarTitulo } from "../utils/padronizarTitulo";
+import BotaoAdicionarALista from "./BotaoAdicionarALista";
 
 interface MediaCardProps {
   item: MediaItem;
 }
 
 const MediaCard: React.FC<MediaCardProps> = ({ item }) => {
-  const { toggleItem, estaAdicionado } = useMinhaListaStore();
-
-  const itemEstaNaLista = estaAdicionado(item.id);
-
-  const textoBotao = itemEstaNaLista ? "✔ Na Lista" : "+ Lista";
-
-  const buttonClasses = itemEstaNaLista
-    ? "bg-red-600 hover:bg-red-700 text-white"
-    : "bg-[var(--color-ja-vi-secondary)] hover:bg-[#8ade5f] text-[var(--color-ja-vi-primary)]";
-
   const titulo = item.title ?? item.name ?? "Título desconhecido";
 
   const tituloPadronizado = padronizarTitulo(titulo);
@@ -32,12 +22,6 @@ const MediaCard: React.FC<MediaCardProps> = ({ item }) => {
     item.release_date?.substring(0, 4) ??
     item.first_air_date?.substring(0, 4) ??
     "N/A";
-
-  const handleToggleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleItem(item.id);
-  };
 
   return (
     <Link
@@ -53,16 +37,7 @@ const MediaCard: React.FC<MediaCardProps> = ({ item }) => {
         <div className="p-4">
           <h3 className="font-bold text-lg mb-1 truncate">{titulo}</h3>
           <p className="text-gray-600 text-sm mb-2">{anoLancamento}</p>
-          <button
-            onClick={handleToggleClick}
-            className={`${buttonClasses}
-                    text-sm py-1 px-3 rounded
-                    transition-colors duration-200
-                    cursor-pointer
-                    `}
-          >
-            {textoBotao}
-          </button>
+          <BotaoAdicionarALista mediaId={item.id} />
         </div>
       </div>
     </Link>
