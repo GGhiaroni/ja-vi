@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useMinhaListaStore } from "../store/useMinhaListaStore";
 import { BarraDePesquisa } from "./BarraDePesquisa";
+import Logomarca from "./Logomarca";
 
 const Navbar: React.FC = () => {
   const contagemItens = useMinhaListaStore((state) => state.count());
@@ -10,13 +11,7 @@ const Navbar: React.FC = () => {
     <header className="bg-(--color-ja-vi-primary) shadow-lg sticky top-0 z-10 w-full">
       <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="flex justify-between items-center w-full md:w-auto">
-          <Link
-            to="/"
-            className="text-(--color-ja-vi-secondary) text-2xl font-bold"
-          >
-            ¿já vi?
-          </Link>
-
+          <Logomarca />
           <nav className="flex items-center space-x-6 md:ml-10">
             <Link
               to="/"
