@@ -14,3 +14,10 @@ export const getSearchURL = (query: string): string => {
     query
   )}`;
 };
+
+export const getOndeAssistirStreamingURL = (
+  mediaType: string,
+  id: string
+): string => {
+  return `${BASE_URL}/${mediaType}/${id}/watch/providers?api_key=${API_KEY}`;
+};
