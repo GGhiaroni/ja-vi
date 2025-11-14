@@ -22,7 +22,7 @@ export const BarraDePesquisa: React.FC = () => {
         placeholder="Buscar filme ou série..."
         className="px-4 py-2 rounded-md 
           text-sm text-(--color-ja-vi-primary)
-          bg-(--color-ja-vi-secondary) bg-opacity-80
+          bg-(--color-ja-vi-secondary)
           focus:outline-none focus:ring-2 focus:ring-(--color-ja-vi-secondary)
           w-full md:w-auto"
       />
