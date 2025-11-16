@@ -33,8 +33,8 @@ export const getStreamingsDisponiveis = (mediaType: "movie" | "tv"): string => {
 };
 
 interface FiltrosDescobrirMedias {
-  genres?: number[];
-  providers?: number[];
+  generos?: number[];
+  streamings?: number[];
 }
 
 export const getDescobrirMediasURL = (
@@ -46,12 +46,12 @@ export const getDescobrirMediasURL = (
   url += `&sort_by=vote_average.desc`;
   url += `&vote_count.gte=200`;
 
-  if (filtros.genres && filtros.genres.length > 0) {
-    url += `&with_genres=${filtros.genres.join(",")}`;
+  if (filtros.generos && filtros.generos.length > 0) {
+    url += `&with_genres=${filtros.generos.join(",")}`;
   }
 
-  if (filtros.providers && filtros.providers.length > 0) {
-    url += `&with_watch_providers=${filtros.providers.join("|")}`;
+  if (filtros.streamings && filtros.streamings.length > 0) {
+    url += `&with_watch_providers=${filtros.streamings.join("|")}`;
   }
 
   return url;

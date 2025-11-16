@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { TRENDING_URL } from "../api/config";
+import { getDescobrirMediasURL, TRENDING_URL } from "../api/config";
 import ErrorMessage from "../components/ErrorMessage";
 import Filtro from "../components/Filtro";
 import LoadingSpinner from "../components/LoadingSpinner";
 import MediaCard from "../components/MediaCard";
 import { useFetch } from "../hooks/useFetch";
 import { useMediaStore } from "../store/useMediaStore";
-import type { MediaItem, MediaResponse } from "../types/media";
+import type { MediaResponse } from "../types/media";
 type FiltroTipos = "todos" | "filmes" | "series";
 
-const Home: React.FC = () => {
-  const [filtroAtivo, setFiltroAtivo] = useState<FiltroTipos>("todos");
+interface FiltrosPersonalizados {
+  generos: number[];
+  providers: number[];
+}
 
-  const { data, loading, error } = useFetch<MediaResponse>(TRENDING_URL);
+const Home: React.FC = () => {
+  const [filtroSimples, setFiltroSimples] = useState<FiltroTipos>("todos");
+
+  const [filtrosPersonalizados, setFiltrosPersonalizados] =
+    useState<FiltrosPersonalizados>({ generos: [], providers: [] });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [apiUrl, setApiUrl] = useState(TRENDING_URL);
+
+  const { data, loading, error } = useFetch<MediaResponse>(apiUrl);
 
   const setMediaList = useMediaStore((state) => state.setMediaList);
 
@@ -22,22 +34,28 @@ const Home: React.FC = () => {
     }
   }, [data, setMediaList]);
 
-  const listaFiltradaPorTipoDeMidia: MediaItem[] =
-    data?.results?.filter((item: MediaItem) => {
-      if (filtroAtivo === "todos") {
-        return true;
+  useEffect(() => {
+    const filtroPersonalizadoEstaAtivado =
+      filtrosPersonalizados.generos.length > 0 ||
+      filtrosPersonalizados.providers.length > 0;
+
+    if (!filtroPersonalizadoEstaAtivado) {
+      setApiUrl(TRENDING_URL);
+    } else {
+      let mediaType: "movie" | "tv" = "movie";
+
+      if (filtroSimples === "series") {
+        mediaType = "tv";
+      }
+      if (filtroSimples === "todos") {
+        mediaType = "movie";
       }
 
-      if (filtroAtivo === "filmes") {
-        return item.media_type === "movie";
-      }
+      const novaUrl = getDescobrirMediasURL(mediaType, filtrosPersonalizados);
 
-      if (filtroAtivo === "series") {
-        return item.media_type === "tv";
-      }
-
-      return true;
-    }) ?? [];
+      setApiUrl(novaUrl);
+    }
+  }, [filtroSimples, filtrosPersonalizados]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -47,16 +65,34 @@ const Home: React.FC = () => {
     return <ErrorMessage message={error} />;
   }
 
+  const listFinal = (data?.results ?? []).filter((item) => {
+    if (!apiUrl.includes("/discover")) {
+      if (filtroSimples === "filmes") return item.media_type === "movie";
+      if (filtroSimples === "series") return item.media_type === "tv";
+    }
+    return true;
+  });
+
   return (
-    <div className="container mx-auto-p-4">
+    <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6 text-(--color-ja-vi-secondary)">
         Em alta hoje 🔥
       </h1>
 
-      <Filtro filtroAtivo={filtroAtivo} setFiltroAtivo={setFiltroAtivo} />
+      <Filtro
+        filtroSimples={filtroSimples}
+        setFiltroSimples={setFiltroSimples}
+        onAbrirModal={() => setIsModalOpen(true)}
+      />
+
+      <ModalFiltro
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onApply={setFiltrosPersonalizados}
+      />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {listaFiltradaPorTipoDeMidia
+        {listFinal
           .filter((item) => item.poster_path)
           .map((item) => (
             <MediaCard key={item.id} item={item} />
