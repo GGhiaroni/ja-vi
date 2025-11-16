@@ -31,3 +31,28 @@ export const getStreamingsDisponiveis = (mediaType: "movie" | "tv"): string => {
   ${BASE_URL}/watch/providers/${mediaType}?api_key=${API_KEY}&language=pt-BR&watch_region=BR
   `;
 };
+
+interface FiltrosDescobrirMedias {
+  genres?: number[];
+  providers?: number[];
+}
+
+export const getDescobrirMediasURL = (
+  mediaType: "movie" | "tv",
+  filtros: FiltrosDescobrirMedias
+): string => {
+  let url = `${BASE_URL}/discover/${mediaType}?api_key=${API_KEY}&language=pt-BR&watch_region=BR`;
+
+  url += `&sort_by=vote_average.desc`;
+  url += `&vote_count.gte=200`;
+
+  if (filtros.genres && filtros.genres.length > 0) {
+    url += `&with_genres=${filtros.genres.join(",")}`;
+  }
+
+  if (filtros.providers && filtros.providers.length > 0) {
+    url += `&with_watch_providers=${filtros.providers.join("|")}`;
+  }
+
+  return url;
+};
