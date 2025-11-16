@@ -25,3 +25,9 @@ export const getOndeAssistirStreamingURL = (
 export const getGenerosURL = (mediaType: "movie" | "tv"): string => {
   return `${BASE_URL}/genre/${mediaType}/list?api_key=${API_KEY}&language=pt-BR`;
 };
+
+export const getStreamingsDisponiveis = (mediaType: "movie" | "tv"): string => {
+  return `
+  ${BASE_URL}/watch/providers/${mediaType}?api_key=${API_KEY}&language=pt-BR&watch_region=BR
+  `;
+};
