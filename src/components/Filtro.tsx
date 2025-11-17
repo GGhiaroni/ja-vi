@@ -22,7 +22,7 @@ const Filtro: React.FC<FiltroProps> = ({
     }`;
   };
   return (
-    <div className="flex mb-8 items-center gap-4">
+    <div className="flex  justify-between mb-8 items-center gap-4">
       <div className="flex gap-4">
         <button
           onClick={() => setFiltroSimples("series")}

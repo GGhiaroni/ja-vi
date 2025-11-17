@@ -76,7 +76,7 @@ const ModalFiltro: React.FC<ModalFiltroProps> = ({
   const limiteMaximo = 5;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex justify-center items-center p-4">
+    <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex justify-center items-center p-4">
       <div className="bg-(--color-ja-vi-primary) text-gray-800 p-6 rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-6 border-b border-b-(--color-ja-vi-secondary) pb-3">
           <h2 className="text-2xl font-bold flex gap-4 items-center text-(--color-ja-vi-secondary)">
