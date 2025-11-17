@@ -4,6 +4,7 @@ import ErrorMessage from "../components/ErrorMessage";
 import Filtro from "../components/Filtro";
 import LoadingSpinner from "../components/LoadingSpinner";
 import MediaCard from "../components/MediaCard";
+import ModalFiltro from "../components/ModalFiltro";
 import { useFetch } from "../hooks/useFetch";
 import { useMediaStore } from "../store/useMediaStore";
 import type { MediaResponse } from "../types/media";

@@ -45,7 +45,7 @@ const Filtro: React.FC<FiltroProps> = ({
       </div>
       <div
         onClick={onAbrirModal}
-        className="flex gap-4 bg-(--color-ja-vi-secondary) text-(--color-ja-vi-primary) font-semibold rounded-lg px-4 py-2"
+        className="hover:cursor-pointer flex gap-4 bg-(--color-ja-vi-secondary) text-(--color-ja-vi-primary) font-semibold rounded-lg px-4 py-2"
       >
         <Filter className="w-5 h-5" />
         Filtro personalizado

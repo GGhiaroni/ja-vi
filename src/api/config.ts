@@ -26,32 +26,29 @@ export const getGenerosURL = (mediaType: "movie" | "tv"): string => {
   return `${BASE_URL}/genre/${mediaType}/list?api_key=${API_KEY}&language=pt-BR`;
 };
 
-export const getStreamingsDisponiveis = (mediaType: "movie" | "tv"): string => {
-  return `
-  ${BASE_URL}/watch/providers/${mediaType}?api_key=${API_KEY}&language=pt-BR&watch_region=BR
-  `;
+export const getStreamingsDisponiveisURL = (
+  mediaType: "movie" | "tv"
+): string => {
+  return `${BASE_URL}/watch/providers/${mediaType}?api_key=${API_KEY}&language=pt-BR&watch_region=BR`;
 };
 
 interface FiltrosDescobrirMedias {
   generos?: number[];
-  streamings?: number[];
 }
 
 export const getDescobrirMediasURL = (
   mediaType: "movie" | "tv",
   filtros: FiltrosDescobrirMedias
 ): string => {
-  let url = `${BASE_URL}/discover/${mediaType}?api_key=${API_KEY}&language=pt-BR&watch_region=BR`;
+  const ordenarComBaseNaMedia =
+    mediaType === "movie" ? "release_date" : "first_air_date";
 
-  url += `&sort_by=vote_average.desc`;
+  let url = `${BASE_URL}/discover/${mediaType}?api_key=${API_KEY}&language=pt-BR&watch_region=BR&sort_by=${ordenarComBaseNaMedia}.desc`;
+
   url += `&vote_count.gte=200`;
 
   if (filtros.generos && filtros.generos.length > 0) {
     url += `&with_genres=${filtros.generos.join(",")}`;
-  }
-
-  if (filtros.streamings && filtros.streamings.length > 0) {
-    url += `&with_watch_providers=${filtros.streamings.join("|")}`;
   }
 
   return url;
